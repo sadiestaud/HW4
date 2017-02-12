@@ -87,7 +87,12 @@ soup = BeautifulSoup(htmldoc,"html.parser")
 people = soup.find_all("div",{"class":"views-row"})
 umsi_titles = {}
 
+for person in people:
+	name = person.find("div",{"class":"field-item even", "property":"dc:title"})
+	title = person.find("div",{"class": "field field-name-field-person-titles field-type-text field-label-hidden"})
 
+	umsi_titles[name.text] = title.text
+	
 # <div class="field field-name-title field-type-ds field-label-hidden"><div class="field-items"><div class="field-item even" property="dc:title">
 # <div class="field field-name-field-person-titles field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">PhD student</div></div></div></div>
 
