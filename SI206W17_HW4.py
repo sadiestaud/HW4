@@ -14,7 +14,10 @@ from bs4 import BeautifulSoup
 ## PART 1 (100 points) - Get the HTML data from http://www.nytimes.com (the New York Times home page) 
 # and save it in a file called nytimes_data.html.
 ## Write the Python code to do so here
-
+html_text = requests.get("http://www.nytimes.com").text #makes the requets
+f = open("nytimes_data.html", "w") #creates a html file
+f.write(html_text) #write the file
+f.close() #closes it
 
 
 
