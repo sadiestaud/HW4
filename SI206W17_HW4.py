@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 ## PART 1 (100 points) - Get the HTML data from http://www.nytimes.com (the New York Times home page) 
 # and save it in a file called nytimes_data.html.
 ## Write the Python code to do so here
+
 html_text = requests.get("http://www.nytimes.com").text #makes the requets
 f = open("nytimes_data.html", "w") #creates a html file
 f.write(html_text) #write the file
@@ -46,6 +47,19 @@ f.close() #closes it
 ## HINT: Remember that you'll need to open the file you created in Part 1, read the contets into one big string, and make a BeautifulSoup object out of that string!
 ## NOTE that the provided link does not include saving the online data in a file as part of the process. But it still provides very useful hints/tricks about how to look for and identify the headlines on the NY Times page.
 
+filename = "nytimes_data.html"
+f = open(filename, "r")
+text_data = f.read()
+f.close()
+
+soup = BeautifulSoup(text_data, "html.parser")
+lst = []
+for story_heading in soup.find_all(class_="story-heading"):
+	if story_heading.a:
+		lst.append(story_heading.a.text.replace("\n", " ").strip())
+	else:
+		lst.append(story_heading.contents[0].strip())
+nytimes_headlines = lst[0:11]
 
 #####################
 
